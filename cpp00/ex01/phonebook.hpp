@@ -1,13 +1,30 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   phonebook.hpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kpawlows <kpawlows@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 05:37:09 by kpawlows          #+#    #+#             */
-/*   Updated: 2023/03/09 05:37:34 by kpawlows         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
 
-#include <iostream>
+# include <iostream>
+# include <iomanip>
+
+class	Contact
+{
+	public :
+
+	std::string first_name;
+	std::string last_name;
+	std::string nickname;
+	std::string phone_number;
+	std::string darkest_secret;
+};
+
+class	PhoneBook
+{
+	public :
+
+	Contact entry[8];
+};
+
+Contact		add_contact(void)
+std::string	fix_lenght(std::string s)
+int			display_contacts(PhoneBook phonebook)
+void		search_contacts(PhoneBook phonebook)
+
+#endif

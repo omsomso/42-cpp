@@ -1,7 +1,7 @@
-NAME	=	phonebook
+NAME	=	zombie
 CC 		=	c++
 CFLAGS	=	-Werror -Wall -Wextra -std=c++98
-SRC 	= 	phonebook.cpp
+SRC 	= 	main.cpp Zombie.cpp
 OBJ		=	$(SRC:.cpp=.o)
 
 GREEN=\033[0;32m
