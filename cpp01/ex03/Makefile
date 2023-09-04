@@ -1,7 +1,7 @@
-NAME	=	ex00
+NAME	=	ex03
 CC 		=	c++
 CFLAGS	=	-Werror -Wall -Wextra -std=c++98
-SRC 	= 	main.cpp Zombie.cpp
+SRC 	= 	main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 OBJ		=	$(SRC:.cpp=.o)
 
 GREEN=\033[0;32m

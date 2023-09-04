@@ -1,7 +1,7 @@
-NAME	=	ex00
+NAME	=	harlFilter
 CC 		=	c++
 CFLAGS	=	-Werror -Wall -Wextra -std=c++98
-SRC 	= 	main.cpp Zombie.cpp
+SRC 	= 	main.cpp Harl.cpp
 OBJ		=	$(SRC:.cpp=.o)
 
 GREEN=\033[0;32m
@@ -16,7 +16,13 @@ $(NAME): $(SRC) $(OBJ)
 	@$(CC) $(OBJ) -o $(NAME)
 
 run : $(NAME)
-	@./$(NAME)
+	./$(NAME) "WARNING"
+
+test1 : $(NAME)
+	./$(NAME) "debug"
+
+test2 : $(NAME)
+	./$(NAME) "erRoR"
 
 clean:
 	@rm -f $(OBJ)

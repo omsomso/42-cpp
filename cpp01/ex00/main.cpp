@@ -2,10 +2,13 @@
 
 int	main(void)
 {
-	Zombie		*zombie1 = NULL;
-	RandomChump	zombie2;
+	Zombie	*zombie = NULL;
+	Zombie	zombie_stack;
 
-	zombie1 = zombie1->newZombie("Bob");
-	zombie1->announce();
-	zombie2.randomChump ("Zean-Michel");
+	zombie = zombie->newZombie("Bob");
+	zombie->announce();
+	zombie_stack.randomChump("Zean-Michel");
+
+	delete zombie;
+	return (0);
 }

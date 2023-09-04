@@ -19,8 +19,12 @@ void	Zombie::announce(void)
 	std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
-void	Zombie::randomChump(std::string name)
+Zombie	*Zombie::zombieHorde(int N, std::string name)
 {
-	this->name = name;
-	this->announce();
+	Zombie	*zombie_horde;
+
+	zombie_horde = new Zombie[N];
+	for (int i = 0; i < N; i++)
+		zombie_horde[i].name = name;
+	return (zombie_horde);
 }
