@@ -7,21 +7,34 @@ Contact	add_contact(void)
 	std::string	input;
 	Contact	entry;
 
-	std::cout << "Input First Name : " << std::endl;
-	std::cin >> input;
-	entry.first_name = input;
-	std::cout << "Input Last Name : " << std::endl;
-	std::cin >> input;
-	entry.last_name = input;
-	std::cout << "Input Nickname : " << std::endl;
-	std::cin >> input;
-	entry.nickname = input;
-	std::cout << "Input Phone Number : " << std::endl;
-	std::cin >> input;
-	entry.phone_number = input;
-	std::cout << "Input Darkest Secret : " << std::endl;
-	std::cin >> input;
-	entry.darkest_secret = input;
+	std::cin.clear();
+	std::cin.ignore();
+
+	while (entry.first_name.length() == 0)
+	{
+		std::cout << "Input First Name : ";
+		std::getline(std::cin, entry.first_name);
+	}
+	while (entry.last_name.length() == 0)
+	{
+		std::cout << "Input Last Name : ";
+		std::getline(std::cin, entry.last_name);
+	}
+	while (entry.nickname.length() == 0)
+	{
+		std::cout << "Input Nickname : ";
+		std::getline(std::cin, entry.nickname);
+	}
+	while (entry.phone_number.length() == 0)
+	{
+		std::cout << "Input Phone Number : ";
+		std::getline(std::cin, entry.phone_number);
+	}
+	while (entry.darkest_secret.length() == 0)
+	{
+		std::cout << "Input Darkest Secret : ";
+		std::getline(std::cin, entry.darkest_secret);
+	}
 	return (entry);
 }
 
@@ -99,11 +112,11 @@ int	main(void)
 	while (1)
 	{
 		std::cin >> input;
-		if (input == "exit")
+		if (input == "EXIT")
 			return (0);
-		if (input == "add")
+		if (input == "ADD")
 			phonebook.entry[++entry_count] = add_contact();
-		if (input == "search")
+		if (input == "SEARCH")
 			search_contacts(phonebook);
 		if (entry_count == 7)
 			entry_count = -1;
