@@ -1,44 +1,32 @@
 #include "phonebook.hpp"
 
-// using namespace std;
-
-Contact	add_contact(void)
+Contact	Contact::access_contact(Contact entry)
 {
-	std::string	input;
-	Contact	entry;
-
-	std::cin.clear();
-	std::cin.ignore();
-
-	while (entry.first_name.length() == 0)
-	{
-		std::cout << "Input First Name : ";
-		std::getline(std::cin, entry.first_name);
-	}
-	while (entry.last_name.length() == 0)
-	{
-		std::cout << "Input Last Name : ";
-		std::getline(std::cin, entry.last_name);
-	}
-	while (entry.nickname.length() == 0)
-	{
-		std::cout << "Input Nickname : ";
-		std::getline(std::cin, entry.nickname);
-	}
-	while (entry.phone_number.length() == 0)
-	{
-		std::cout << "Input Phone Number : ";
-		std::getline(std::cin, entry.phone_number);
-	}
-	while (entry.darkest_secret.length() == 0)
-	{
-		std::cout << "Input Darkest Secret : ";
-		std::getline(std::cin, entry.darkest_secret);
-	}
 	return (entry);
 }
 
-std::string	fix_lenght(std::string s)
+Contact	Contact::save_contact(Contact entry)
+{
+	std::cout << "Enter first name: ";
+	std::getline(std::cin, entry.first_name);
+	std::cout << "Enter last name: ";
+	std::getline(std::cin, entry.last_name);
+	std::cout << "Enter nickname: ";
+	std::getline(std::cin, entry.nickname);
+	std::cout << "Enter phone number: ";
+	std::getline(std::cin, entry.phone_number);
+	std::cout << "Enter darkest secret: ";
+	std::getline(std::cin, entry.darkest_secret);
+	std::cout << std::endl;
+	// std::cout << "First name: " << entry.first_name << std::endl;
+	// std::cout << "Last name: " << entry.last_name << std::endl;
+	// std::cout << "Nickname: " << entry.nickname << std::endl;
+	// std::cout << "Phone number: " << entry.phone_number << std::endl;
+	// std::cout << "Darkest secret: " << entry.darkest_secret << std::endl;
+	return (entry);
+}
+
+std::string	Contact::fix_lenght(std::string s)
 {
 	if (s.length() > 10)
 	{
@@ -48,78 +36,41 @@ std::string	fix_lenght(std::string s)
 	return (s);
 }
 
-int	display_contacts(PhoneBook phonebook)
+int	Contact::diplay_contact(Contact entry, int index)
 {
-	int		idx = 0;
-	std::string	input;
 
-	if (phonebook.entry[0].first_name.length() == 0)
-	{
-		std::cout << "No contacts" << std::endl;
+	std::cout << std::setw(10) << index << "|";
+
+	if (entry.first_name.length == 0)
 		return (1);
-	}
-	while (idx < 8 && phonebook.entry[idx].first_name.length() > 0)
-	{
-		// setiosflags(ios::left);
-		std::cout << std::setw(10) << "index" << "|" << std::setw(10) <<  "first name";
-		std::cout << "|" << std::setw(10) <<  "last name";
-		std::cout << "|" << std::setw(10) <<  "nickname" << std::endl;
-
-		std::cout << std::setw(10) << idx << "|";
-		std::cout << std::setw(10) << fix_lenght(phonebook.entry[idx].first_name);
-		std::cout << "|" << std::setw(10) << fix_lenght(phonebook.entry[idx].last_name);
-		std::cout << "|" << std::setw(10) << fix_lenght(phonebook.entry[idx].nickname) << std::endl;
-		idx++;
-	}
+	std::cout << std::setw(10) << entry.fix_lenght(entry.first_name);
+	std::cout << "|" << std::setw(10) << fix_lenght(entry.last_name);
+	std::cout << "|" << std::setw(10) << fix_lenght(entry.nickname) << std::endl;
 	return (0);
 }
 
-void	search_contacts(PhoneBook phonebook)
+void	PhoneBook::diplay_contacts(PhoneBook phonebook)
 {
-	int		idx = 0;
-	std::string	input;
+	int		index = 0;
 
-	if (display_contacts(phonebook))
-		return ;
-	std::cout << "Input index : " << std::endl;
-	std::cin >> input;
-	if (!all_of(input.begin(), input.end(), ::isdigit))
-	{
-		std::cout << "Wrong index" << std::endl;
-		return ;
-	}
-	idx = stoi(input);
-	if (input.length() > 1 || input[0] < '0' || input[0] > '7')
-		std::cout << "Wrong index" << std::endl;
-	else if (phonebook.entry[idx].first_name.length() == 0)
-		std::cout << "Wrong index" << std::endl;
-	else
-	{
-		std::cout << "First Name : " << phonebook.entry[idx].first_name << std::endl;
-		std::cout << "Last Name : " << phonebook.entry[idx].last_name << std::endl;
-		std::cout << "Nickname : " << phonebook.entry[idx].nickname << std::endl;
-		std::cout << "Phone Number : " << phonebook.entry[idx].phone_number << std::endl;
-		std::cout << "Darkest Secret : " << phonebook.entry[idx].darkest_secret << std::endl;
-	}
+	if (phonebook.entry[0].diplay_contact(phonebook.entry[0], index) == 1)
+		std::cout << "No contacts" << std::endl;
+}
+void	add_contact(PhoneBook phonebook)
+{
+	Contact entry;
+
+	// setiosflags(ios::left);
+	phonebook.entry[0] = entry.save_contact(phonebook.entry[0]);
+	std::cout << std::setw(10) << "index" << "|" << std::setw(10) <<  "first name";
+	std::cout << "|" << std::setw(10) <<  "last name";
+	std::cout << "|" << std::setw(10) <<  "nickname" << std::endl;
 }
 
 int	main(void)
 {
-	std::string	input;
 	PhoneBook	phonebook;
-	int			entry_count = -1;
 
-	while (1)
-	{
-		std::cin >> input;
-		if (input == "EXIT")
-			return (0);
-		if (input == "ADD")
-			phonebook.entry[++entry_count] = add_contact();
-		if (input == "SEARCH")
-			search_contacts(phonebook);
-		if (entry_count == 7)
-			entry_count = -1;
-	}
+	add_contact(phonebook);
 	return (0);
 }
