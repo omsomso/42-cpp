@@ -22,19 +22,22 @@ class	Contact
 	std::string get_phone_number();
 	std::string get_darkest_secret();
 
-	Contact		access_contact(Contact entry);
-	std::string	fix_lenght(std::string s);
-	int			display_contact(Contact entry, int index);
 	Contact		create_contact(Contact entry);
+	int			display_contact_preview(Contact entry,  int index);
+	int			display_contact(Contact entry);
+	int			check_validity(std::string input);
+	std::string	fix_lenght(std::string s);
 };
 
 class	PhoneBook
 {
-	public :
+	private :
 	Contact		entry[8];
+
+	public :
+	Contact		get_contact_entry(Contact entry, int index);
+	Contact		add_contact_entry(Contact entry int index);
 	void		display_contacts(PhoneBook phonebook);
-	// void		search_contacts(PhoneBook phonebook);
-	// Contact		add_contact(Contact entry);
 };
 
 #endif
