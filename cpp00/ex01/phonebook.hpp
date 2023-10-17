@@ -32,11 +32,11 @@ class	Contact
 class	PhoneBook
 {
 	private :
-	Contact		entry[8];
 
 	public :
-	Contact		get_contact_entry(Contact entry, int index);
-	Contact		add_contact_entry(Contact entry int index);
+	Contact		entry[8];
+	Contact		get_contact_entry(PhoneBook phonebook, int index);
+	// Contact		add_contact_entry(Contact entry int index);
 	void		display_contacts(PhoneBook phonebook);
 };
 

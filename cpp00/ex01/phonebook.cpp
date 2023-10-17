@@ -49,29 +49,29 @@ Contact	Contact::create_contact(Contact entry)
 
 	do	{
 		std::cout << "Enter first name: ";
-		std::getline(std::cin, entry.first_name);
+		std::getline(std::cin, this->first_name);
 	}
-	while (entry.check_validity(entry.first_name) == 1);
+	while (entry.check_validity(this->first_name) == 1);
 	do	{
 		std::cout << "Enter last name: ";
-		std::getline(std::cin, entry.last_name);
+		std::getline(std::cin, this->last_name);
 	}
-	while (entry.check_validity(entry.last_name) == 1);
+	while (entry.check_validity(this->last_name) == 1);
 	do	{
 		std::cout << "Enter nickname: ";
-		std::getline(std::cin, entry.nickname);
+		std::getline(std::cin, this->nickname);
 	}
-	while (entry.check_validity(entry.nickname) == 1);
+	while (entry.check_validity(this->nickname) == 1);
 	do	{
 		std::cout << "Enter phone number: ";
-		std::getline(std::cin, entry.phone_number);
+		std::getline(std::cin, this->phone_number);
 	}
-	while (entry.check_validity(entry.phone_number) == 1);
+	while (entry.check_validity(this->phone_number) == 1);
 	do	{
 		std::cout << "Enter darkest secret: ";
-		std::getline(std::cin, entry.darkest_secret);
+		std::getline(std::cin, this->darkest_secret);
 	}
-	while (entry.check_validity(entry.darkest_secret) == 1);
+	while (entry.check_validity(this->darkest_secret) == 1);
 
 	std::cout << std::endl;
 
@@ -92,11 +92,12 @@ std::string	Contact::fix_lenght(std::string s)
 // displays full contact info
 int	Contact::display_contact(Contact entry)
 {
-	std::cout << "First Name\t: " << entry.get_first_name() << std::endl;
-	std::cout << "Last Name\t: " << entry.get_last_name() << std::endl;
-	std::cout << "Nickname\t: " << entry.get_nickname() << std::endl;
-	std::cout << "Phone Number\t: " << entry.get_phone_number() << std::endl;
-	std::cout << "Darkest Secret\t: " <<entry.get_darkest_secret() << std::endl;
+	(void) entry;
+	std::cout << "First Name\t: " << this->get_first_name() << std::endl;
+	std::cout << "Last Name\t: " << this->get_last_name() << std::endl;
+	std::cout << "Nickname\t: " << this->get_nickname() << std::endl;
+	std::cout << "Phone Number\t: " << this->get_phone_number() << std::endl;
+	std::cout << "Darkest Secret\t: " << this->get_darkest_secret() << std::endl;
 
 	return (0);
 }
@@ -128,7 +129,7 @@ void	PhoneBook::display_contacts(PhoneBook phonebook)
 	std::string	tmp;
 	int			index;
 
-	// check if there are any contacts
+	check if there are any contacts
 	tmp = phonebook.entry[0].get_first_name();
 	if (tmp.length() == 0)
 	{
@@ -169,13 +170,13 @@ void	PhoneBook::display_contacts(PhoneBook phonebook)
 
 	// display contact
 	else
-		contact.display_contact(phonebook.get_contact_entry(entry, index));
+		contact.display_contact(phonebook.get_contact_entry(phonebook, index));
 	
 	std::cin.clear();
 	std::cin.ignore();
 }
 
-Contact		PhoneBook::get_contact_entry(PhoneBook phonebook, Contact entry, int index)
+Contact		PhoneBook::get_contact_entry(PhoneBook phonebook, int index)
 {
 	return (phonebook.entry[index]);
 }
