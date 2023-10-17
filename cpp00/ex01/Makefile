@@ -1,7 +1,7 @@
 NAME	=	phonebook
 CC 		=	c++
-CFLAGS	=	-Werror -Wall -Wextra -std=c++98
-SRC 	= 	phonebook.cpp
+CFLAGS	=	-Werror -Wall -Wextra -std=c++98 -pedantic
+SRC 	= 	phonebook.cpp contact.cpp
 OBJ		=	$(SRC:.cpp=.o)
 
 GREEN=\033[0;32m
