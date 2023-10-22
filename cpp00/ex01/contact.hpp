@@ -26,6 +26,7 @@ class	Contact
 	void		display_contact();
 	int			check_validity(std::string input);
 	std::string	fix_lenght(std::string s);
+	bool		str_isspace(std::string input);
 };
 
 #endif

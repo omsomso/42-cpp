@@ -13,6 +13,11 @@ void	PhoneBook::add_phonebook_entry(int index)	{
 	this->entry[index].create_contact();
 }
 
+bool	PhoneBook::str_isdigit(std::string input)
+{
+	return (input.find_first_not_of("1234567890"));
+}
+
 // search functionality
 void	PhoneBook::search()
 {
@@ -43,14 +48,14 @@ void	PhoneBook::search()
 	std::cin >> input;
 
 	// check if index is a number
-	if (!all_of(input.begin(), input.end(), ::isdigit))
+	if (!str_isdigit(input))
 	{
 		std::cout << "Error : Wrong index" << std::endl;
 		return ;
 	}
 
 	// check if index is between 0 and 7
-	index = stoi(input);
+	index = atoi(input.c_str());
 	if (input.length() > 1 || input[0] < '0' || input[0] > '7')
 	{
 		std::cout << "Error : Wrong index" << std::endl;

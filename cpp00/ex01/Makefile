@@ -1,6 +1,6 @@
 NAME	=	phonebook
-CC 		=	c++
-CFLAGS	=	-Werror -Wall -Wextra -std=c++98 -pedantic
+CXX		=	c++
+CXFLAGS	=	-Werror -Wall -Wextra -std=c++98 -pedantic
 SRC 	= 	phonebook.cpp contact.cpp
 OBJ		=	$(SRC:.cpp=.o)
 
@@ -12,8 +12,8 @@ END=\033[0m
 all: $(NAME)
 
 $(NAME): $(SRC) $(OBJ)
-	$(CC) $(CFLAGS) -c $(SRC)
-	@$(CC) $(OBJ) -o $(NAME)
+	$(CXX) $(CXFLAGS) -c $(SRC)
+	@$(CXX) $(OBJ) -o $(NAME)
 
 run : $(NAME)
 	@./$(NAME)

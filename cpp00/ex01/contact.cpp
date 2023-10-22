@@ -21,6 +21,23 @@ std::string Contact::get_darkest_secret() {
 	return (this->darkest_secret);
 }
 
+bool	Contact::str_isspace(std::string input)
+{
+	int i = 0;
+	int count = 0;
+	int n = input.length();
+
+	while (i < n)
+	{
+		if (std::isspace(input[i]) == 1)
+			count++;
+		i++;
+	}
+	if (count == n - 1)
+		return (1);
+	return(0);
+}
+
 // check if input string isn't empty or isn't only whitespaces
 int		Contact::check_validity(std::string input)
 {
@@ -29,7 +46,7 @@ int		Contact::check_validity(std::string input)
 		std::cout << "Error : Field can't be left empty!" << std::endl;
 		return (1);
 	}
-	else if (all_of(input.begin(), input.end(), ::isspace))
+	else if (str_isspace(input))
 	{
 		std::cout << "Error : Field can't be left empty!" << std::endl;
 		return (1);
@@ -44,27 +61,27 @@ void	Contact::create_contact()
 	std::cin.ignore();
 
 	do	{
-		std::cout << "Enter first name\t: ";
+		std::cout << "Enter first name : ";
 		std::getline(std::cin, this->first_name);
 	}
 	while (this->check_validity(this->first_name) == 1);
 	do	{
-		std::cout << "Enter last name\t: ";
+		std::cout << "Enter last name : ";
 		std::getline(std::cin, this->last_name);
 	}
 	while (this->check_validity(this->last_name) == 1);
 	do	{
-		std::cout << "Enter nickname\t: ";
+		std::cout << "Enter nickname : ";
 		std::getline(std::cin, this->nickname);
 	}
 	while (this->check_validity(this->nickname) == 1);
 	do	{
-		std::cout << "Enter phone number\t: ";
+		std::cout << "Enter phone number : ";
 		std::getline(std::cin, this->phone_number);
 	}
 	while (this->check_validity(this->phone_number) == 1);
 	do	{
-		std::cout << "Enter darkest secret\t: ";
+		std::cout << "Enter darkest secret : ";
 		std::getline(std::cin, this->darkest_secret);
 	}
 	while (this->check_validity(this->darkest_secret) == 1);
