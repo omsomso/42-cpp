@@ -16,5 +16,10 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
+run: $(NAME)
+	./$(NAME) "shhhhh... I think the students are asleep..."
+	./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
+	./$(NAME)
+
 re: fclean all
 	@printf "[$(NAME)] $(GREEN) \t re complete :) $(END)\n"
