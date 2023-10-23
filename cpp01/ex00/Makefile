@@ -1,7 +1,7 @@
 NAME	=	ex00
-CC 		=	c++
+CC		=	c++
 CFLAGS	=	-Werror -Wall -Wextra -std=c++98
-SRC 	= 	main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
+SRC		= 	main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 OBJ		=	$(SRC:.cpp=.o)
 
 GREEN=\033[0;32m
@@ -11,9 +11,13 @@ END=\033[0m
 
 all: $(NAME)
 
-$(NAME): $(SRC) $(OBJ)
-	$(CC) $(CFLAGS) -c $(SRC)
-	@$(CC) $(OBJ) -o $(NAME)
+$(NAME): $(OBJ)
+	@printf "[$(NAME)]$(GREEN) \t creating executable... $(END)\n"
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+%.o : %.cpp
+	@printf "[$(NAME)]$(GREEN) \t creating object files... $(END)\n"
+	$(CC) -c $(CFLAGS) $< -o $@
 
 run : $(NAME)
 	@./$(NAME)

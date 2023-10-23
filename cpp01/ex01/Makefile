@@ -11,9 +11,13 @@ END=\033[0m
 
 all: $(NAME)
 
-$(NAME): $(SRC) $(OBJ)
-	$(CC) $(CFLAGS) -c $(SRC)
-	@$(CC) $(OBJ) -o $(NAME)
+$(NAME): $(OBJ)
+	@printf "[$(NAME)]$(GREEN) \t creating executable... $(END)\n"
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+%.o : %.cpp
+	@printf "[$(NAME)]$(GREEN) \t creating object files... $(END)\n"
+	$(CC) -c $(CFLAGS) $< -o $@
 
 run : $(NAME)
 	@./$(NAME)

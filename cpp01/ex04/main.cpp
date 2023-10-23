@@ -7,18 +7,31 @@ int main(void)
 
 	std::cout << "Input filename : " << std::endl;
 	std::getline(std::cin, filename);
+	std::ifstream input_file;
+	std::ofstream output_file;
+	input_file.open(filename, std::ios::in);
+
+	if (!input_file)
+	{
+		std::cout << "Error : specify an existing input file" << std::endl;
+		return (0);
+	}
+	
+	filename.append(".replace");
+	output_file.open(filename, std::ios::out);
+	if (!output_file)
+	{
+		std::cout << "Error : can't create the output file" << std::endl;
+		return (0);
+	}
 
 	std::cout << "Input string 1 : " << std::endl;
 	std::getline(std::cin, s1);
 	std::cout << "Input string 2 : " << std::endl;
 	std::getline(std::cin, s2);
 
-	std::ifstream input_file;
-	std::ofstream output_file;
-
-	input_file.open(filename, std::ios::in);
-	filename.append(".replace");
-	output_file.open(filename, std::ios::out);
+	if (s1.empty() || s2.empty())
+		std::cout << "Error : strings can't be empty" << std::endl;
 
 	std::string input_str, tmp, out;
 	size_t		pos = 0;

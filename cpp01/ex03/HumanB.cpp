@@ -1,18 +1,17 @@
 #include "Weapon.hpp"
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 
-HumanB::HumanB(std::string name)
-{
-	this->name = name; 
+HumanB::HumanB(std::string name) {
+	this->name = name;
 	this->weapon = NULL;
 }
 
-HumanB::~HumanB()
-{
+HumanB::~HumanB() {
 	// std::cout << "destroyed HumanB" << std::endl;
 }
 
-void	HumanB::attack(void)
-{
+void	HumanB::attack(void) {
 	sleep(1);
 	if (this->weapon == NULL)
 	{
@@ -21,12 +20,11 @@ void	HumanB::attack(void)
 		std::cout << this->name << " attacks with his fists!" << std::endl;
 	}
 	else
-		std::cout << this->name << " attacks with his " << this->weapon->get_type() << std::endl;
+		std::cout << this->name << " attacks with his " << this->weapon->getType() << std::endl;
 }
 
-void	HumanB::setWeapon(Weapon &weapon)
-{
+void	HumanB::setWeapon(Weapon &weapon) {
 	this->weapon = &weapon;
 	sleep(1);
-	std::cout << this->name << " has a new weapon: " << this->weapon->get_type() << std::endl;
+	std::cout << this->name << " has a new weapon: " << this->weapon->getType() << std::endl;
 }

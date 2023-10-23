@@ -1,17 +1,20 @@
 #include "Weapon.hpp"
+#include "HumanA.hpp"
+#include "HumanB.hpp"
+
 
 int	main(void)
 {
 	Weapon	weapon;
-	weapon.set_type("philosopher's stone");
+	weapon.setType("philosopher's stone");
 
-	HumanA	jean_michel("Jean-Jacques Rousseau", weapon);
-	HumanB	jean_pierre("Jean-Paul Sartre");
+	HumanA	philoA("Jean-Jacques Rousseau", weapon);
+	HumanB	philoB("Jean-Paul Sartre");
 
-	jean_michel.attack();
-	jean_pierre.attack();
-	jean_pierre.setWeapon(weapon);
-	jean_pierre.attack();
-	jean_michel.attack();
+	philoA.attack();
+	philoB.attack();
+	philoB.setWeapon(weapon);
+	philoB.attack();
+	philoA.attack();
 	return (0);
 }

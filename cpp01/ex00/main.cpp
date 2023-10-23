@@ -3,12 +3,12 @@
 int	main(void)
 {
 	Zombie	*zombie = NULL;
-	Zombie	zombie_stack;
-
-	zombie = zombie->newZombie("Bob");
+	zombie = zombie->newZombie("Zob");
 	zombie->announce();
-	zombie_stack.randomChump("Zean-Michel");
-
 	delete zombie;
+
+	Zombie	zombie_stack;
+	zombie_stack.randomChump("Zean-Misel");
+
 	return (0);
 }
