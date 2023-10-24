@@ -1,43 +1,37 @@
 #include "Harl.hpp"
 
-void Harl::debug(void)
-{
+void Harl::debug(void) {
 	std::cout << "It rains but i like it" << std::endl;
 }
 
-void Harl::info(void)
-{
+void Harl::info(void) {
 	std::cout << "Rain here is used as a literary device" << std::endl;
 }
 
-void Harl::warning(void)
-{
+void Harl::warning(void) {
 	std::cout << "It actually rains since 2 weeks" << std::endl;
 }
 
-void Harl::error(void)
-{
+void Harl::error(void) {
 	std::cout << "The basement flooded" << std::endl;
 }
 
-int Harl::find_level(std::string level)
-{
-	if (level == "DEBUG")
-		return (DEBUG);
-	else if (level == "INFO")
-		return (INFO);
-	else if (level == "WARNING")
-		return (WARNING);
-	else if (level == "ERROR")
-		return (ERROR);
-	else
-		return (-1);
+int Harl::find_level(std::string level) {
+	std::string message[4] = {
+		"DEBUG",
+		"INFO",
+		"WARNING",
+		"ERROR"
+	};
+	for (int i = 0; i < 4; i++) {
+		if (level == message[i])
+			return (i);
+	}
+	return (-1);
 }
 
-void Harl::complain(int level)
-{
-	switch (level)
-	{
+void Harl::complain(int level) {
+	switch (level) {
 		default :
 			std::cout << "Invalid level" << std::endl;
 			return ;
@@ -50,5 +44,4 @@ void Harl::complain(int level)
 		case ERROR :
 			this->error();
 	}
-
 }

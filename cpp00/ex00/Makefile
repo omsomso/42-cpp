@@ -19,16 +19,17 @@ $(NAME): $(OBJ)
 	@printf "[$(NAME)]$(GREEN) \t creating object files... $(END)\n"
 	$(CC) -c $(CFLAGS) $< -o $@
 
+run: $(NAME)
+	@printf "[$(NAME)]$(GREEN) \t running executable $(END)\n"
+	./$(NAME) "shhhhh... I think the students are asleep..."
+	./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
+	./$(NAME)
+
 clean:
 	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
-
-run: $(NAME)
-	./$(NAME) "shhhhh... I think the students are asleep..."
-	./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
-	./$(NAME)
 
 re: fclean all
 	@printf "[$(NAME)] $(GREEN) \t re complete :) $(END)\n"

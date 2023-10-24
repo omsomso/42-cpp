@@ -20,6 +20,7 @@ $(NAME): $(OBJ)
 	$(CC) -c $(CFLAGS) $< -o $@
 
 run : $(NAME)
+	@printf "[$(NAME)]$(GREEN) \t running executable $(END)\n"
 	@./$(NAME)
 
 clean:
