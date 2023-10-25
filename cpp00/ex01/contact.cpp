@@ -33,7 +33,7 @@ bool	Contact::str_isspace(std::string input)
 			count++;
 		i++;
 	}
-	if (count == n - 1)
+	if (count == n)
 		return (1);
 	return(0);
 }
