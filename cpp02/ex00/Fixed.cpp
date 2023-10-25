@@ -8,12 +8,12 @@ Fixed::Fixed() {
 }
 
 Fixed::Fixed(Fixed &other) {
-	value = other.value;
+	this->value = other.value;
 	std::cout << "Copy constructor called" << std::endl;
 }
 
 Fixed& Fixed::operator=(Fixed &other) {
-	value = other.value;
+	this->value = other.value;
 	std::cout << "Copy assignment operator called" << std::endl;
 	return (*this);
 }
