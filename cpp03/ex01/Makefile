@@ -1,7 +1,7 @@
 NAME	=	ex01
 CC 		=	c++
 CFLAGS	=	-Werror -Wall -Wextra -std=c++98
-SRC 	= 	main.cpp Fixed.cpp
+SRC 	= 	main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJ		=	$(SRC:.cpp=.o)
 
 GREEN=\033[0;32m

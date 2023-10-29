@@ -1,4 +1,4 @@
-NAME	=	ex01
+NAME	=	ex02
 CC 		=	c++
 CFLAGS	=	-Werror -Wall -Wextra -std=c++98
 SRC 	= 	main.cpp Fixed.cpp
@@ -32,4 +32,4 @@ fclean: clean
 	@printf "[$(NAME)]$(GREEN) \t $(NAME) removed $(END)\n"
 
 re: fclean all
-	@printf "[$(NAME)] $(GREEN) \t complete :) $(END)\n"qq
+	@printf "[$(NAME)] $(GREEN) \t complete :) $(END)\n"

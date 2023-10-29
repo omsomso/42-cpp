@@ -1,7 +1,4 @@
 #include "Fixed.hpp"
-#include <cmath>
-
-// const int Fixed::bits = 8;
 
 Fixed::Fixed() {
 	std::cout << "Default constructor called" << std::endl;
@@ -21,8 +18,8 @@ Fixed::Fixed(const float value) {
 }
 
 Fixed::Fixed(const Fixed &other) {
-	this->value = other.value;
 	std::cout << "Copy constructor called" << std::endl;
+	this->value = other.value;
 }
 
 Fixed& Fixed::operator=(const Fixed &other) {

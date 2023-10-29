@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <string>
+# include <cmath>
 
 class Fixed
 {
@@ -41,6 +42,6 @@ class Fixed
 		float	toFloat(void) const;
 };
 
-std::ostream &operator << (std::ostream& str, const Fixed& number);
+std::ostream& operator << (std::ostream& str, const Fixed& number);
 
 #endif

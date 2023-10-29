@@ -1,7 +1,4 @@
 #include "Fixed.hpp"
-#include <cmath>
-
-// const int Fixed::bits = 8;
 
 Fixed::Fixed() {
 	// std::cout << "Default constructor called" << std::endl;
