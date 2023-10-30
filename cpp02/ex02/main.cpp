@@ -27,6 +27,21 @@ int main(void)
 
 	std::cout << Fixed::min(c, d) << std::endl;
 	std::cout << Fixed::max(c, d) << std::endl;
+	std::cout << std::endl;
 
-	return 0;
+	bool result;
+	Fixed peti(0);
+	Fixed gran(10);
+	Fixed gran2(10);
+	result = peti < gran;
+	std::cout << result << std::endl;
+	result = peti > gran;
+	std::cout << result << std::endl;
+	result = peti >= gran;
+	std::cout << result << std::endl;
+	result = peti <= gran;
+	std::cout << result << std::endl;
+	result = gran <= gran2;
+	std::cout << result << std::endl;
+	return (0);
 }
