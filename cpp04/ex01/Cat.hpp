@@ -4,6 +4,9 @@
 #include "Animal.hpp"
 
 class Cat : public Animal {
+	private :
+	Brain* catbrain;
+
 	public :
 	Cat();
 	Cat(std::string type);
