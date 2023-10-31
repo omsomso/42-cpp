@@ -3,6 +3,9 @@
 #include "Cat.hpp"
 
 int main(void) {
+
+	// Animal compilationError;
+
 	std::cout << "----Leak test----" << std::endl << std::endl;
 
 	const Animal* j = new Dog();
@@ -54,5 +57,3 @@ int main(void) {
 
 	return (0);
 }
-
-// The copy assignment operator works with the type of the object it is called on, and if you have a pointer or reference to the base class, it will use the base class's copy assignment operator. If you want to avoid casting, you would typically design your code to work with pointers or references to the derived class whenever you need to perform operations specific to the derived class. This ensures that the correct overridden methods, including the copy assignment operator, are called automatically based on the type of the object, as a result of polymorphism. This design aligns with the principles of object-oriented programming and allows you to work with the most specific class type, eliminating the need for explicit casting.
