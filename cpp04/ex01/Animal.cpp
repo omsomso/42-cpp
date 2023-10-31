@@ -30,3 +30,20 @@ const std::string Animal::getType() const {
 void Animal::makeSound() const {
 	std::cout << "*default animal sounds*" << std::endl;
 }
+
+// brain class
+
+Brain::Brain() {
+	std::cout << "Brain initialised" << std::endl;
+}
+
+Brain::Brain(const Brain &other) {
+	std::cout << "Brain copy contructor called" << std::endl;
+	*this = other;
+}
+
+Brain& Brain::operator=(const Brain &other) {
+	std::cout << "Brain copy assignment operator called" << std::endl;
+	this->ideas[0] = other.ideas[0];
+	return (*this);
+}
