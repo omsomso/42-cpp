@@ -66,7 +66,7 @@ std::string* Brain::getIdeas() {
 
 void Brain::printIdeas() {
 	if (this->ideas[0].empty()){
-		std::cout << "Head empty!" << std::endl;
+		std::cout << "Brain empty!" << std::endl;
 		return ;
 	}
 	std::cout << "First 10 brain ideas are : ";

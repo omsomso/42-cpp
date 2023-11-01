@@ -2,7 +2,6 @@
 # define ANIMAL_HPP
 
 # include <iostream>
-# include <algorithm>
 
 class Animal {
 	protected :

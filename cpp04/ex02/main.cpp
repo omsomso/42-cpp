@@ -25,12 +25,10 @@ int main(void) {
 		else
 			animalArray[i] = new Cat();
 	}
-	for (int i = 0; i < nb_animals; i++) {
+	for (int i = 0; i < nb_animals; i++)
 		animalArray[i]->makeSound();
-	}
-	for (int i = 0; i < nb_animals; i++) {
+	for (int i = 0; i < nb_animals; i++)
 		delete animalArray[i];
-	}
 	delete[] animalArray;
 
 	// Deep copy with Cat objects
