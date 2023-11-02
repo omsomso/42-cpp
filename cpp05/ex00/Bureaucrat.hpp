@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+
 class Bureaucrat {
 	private :
 	const std::string name;
@@ -14,10 +15,22 @@ class Bureaucrat {
 	Bureaucrat(Bureaucrat& other);
 	Bureaucrat& operator=(Bureaucrat& other);
 
-	std::string getName();
-	int getGrade();
+	std::string getName() const;
+	int getGrade() const;
 	void incrementGrade();
 	void decrementGrade();
+
+	class Exception {
+		private :
+		std::string message;
+
+		public :
+		Exception(const std::string message);
+		
+		std::string getMessage();
+	};
 };
+
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& instance);
 
 #endif
