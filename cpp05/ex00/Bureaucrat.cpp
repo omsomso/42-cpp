@@ -1,17 +1,23 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : name("Nameless") {
+Bureaucrat::Bureaucrat() : name("Nameless bureaucrat") {
+	std::cout << "Creating " << this->name << std::endl;
+}
+
+Bureaucrat::Bureaucrat(const std::string name) : name(name), grade(150) {
+	std::cout << "Creating " << this->name << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name) {
+	std::cout << "Creating " << name << " with grade " << grade << "..." << std::endl;
 	if (grade < 1)
-		throw Exception("Bureaucrat::GradeTooHighException");
+		throw GradeTooHighException();
 	if (grade > 150)
-		throw Exception("Bureaucrat::GradeTooLowException");
+		throw GradeTooLowException();
 	this->grade = grade;
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat& other) : name(other.name), grade(other.grade) {
+Bureaucrat::Bureaucrat(const Bureaucrat& other) : name(other.name), grade(other.grade) {
 }
 
 Bureaucrat& Bureaucrat::operator=(Bureaucrat& other) {
@@ -19,35 +25,43 @@ Bureaucrat& Bureaucrat::operator=(Bureaucrat& other) {
 	return (*this);
 }
 
+Bureaucrat::~Bureaucrat() {
+	// std::cout << "Bureaucrat destroyed" << std::endl;
+}
+
 const std::string Bureaucrat::getName() const {
 	return (this->name);
 }
 
-int Bureaucrat::getGrade() {
+int Bureaucrat::getGrade() const {
 	return (this->grade);
 }
 
 void Bureaucrat::incrementGrade() {
+	std::cout << this->name << " incrementing grade..." << std::endl;
 	if (this->grade == 1)
-		throw Exception("Bureaucrat::GradeTooHighException");
+		throw GradeTooHighException();
 	this->grade--;
 }
 
 void Bureaucrat::decrementGrade() {
+	std::cout << this->name << " decrementing grade..." << std::endl;
 	if (this->grade == 150)
-		throw Exception("Bureaucrat::GradeTooLowException");
+		throw GradeTooLowException();
 	this->grade++;
 }
 
-Bureaucrat::Exception::Exception(std::string message) : message(message) {
+const char* Bureaucrat::GradeTooLowException::what() const throw() {
+	return ("Error : Bureaucrat grade can't be 151 or lower.");
 }
 
-std::string Bureaucrat::Exception::getMessage() {
-	return (this->message);
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
+	return ("Error : Bureaucrat grade can't be 0 or higher.");
+
 }
 
 std::ostream& operator<<(std::ostream &os, const Bureaucrat &instance) {
 	
-	os << instance.getName() << " bureaucrat grade " << instance.getGrade();
+	os << instance.getName() << ", bureaucrat grade " << instance.getGrade() << ".";
 	return (os);
 }
