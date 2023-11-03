@@ -2,6 +2,10 @@
 # define BUREAUCRAT_HPP
 
 #include <iostream>
+#include "Form.hpp"
+
+#define GREEN "\033[0;32m"
+#define RESET "\033[0m"
 
 class Form;
 
@@ -33,36 +37,5 @@ class Bureaucrat {
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& instance);
-
-class Form {
-	private :
-	const std::string name;
-	bool signedStatus;
-	const int gradeSign;
-	const int gradeExec;
-
-	public :
-	Form();
-	Form(std::string name, const int gradeSign, const int gradeExec);
-	Form(Form& other);
-	Form& operator=(Form& other);
-	~Form();
-
-	std::string getName() const;
-	int getGradeSign() const;
-	int getGradeExec() const;
-	bool getSignedStatus() const;
-	void beSigned(Bureaucrat &instance);
-
-	class GradeTooLowException : public std::exception {
-		virtual const char *what() const throw();
-	};
-	class GradeTooHighException : public std::exception {
-		virtual const char *what() const throw();
-	};
-};
-
-std::ostream& operator<<(std::ostream& os, const Form& instance);
-
 
 #endif

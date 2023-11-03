@@ -52,11 +52,11 @@ void Bureaucrat::decrementGrade() {
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
-	return ("Error : Bureaucrat grade can't be 151 or lower.");
+	return ("Error : Bureaucrat grade can't be lower than 150.");
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
-	return ("Error : Bureaucrat grade can't be 0 or higher.");
+	return ("Error : Bureaucrat grade can't be higher than 1.");
 
 }
 

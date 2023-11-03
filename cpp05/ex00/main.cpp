@@ -1,7 +1,7 @@
 #include "Bureaucrat.hpp"
 
 void testInstantiation() {
-	std::cout << "---Testing valid bureaucrat instantiation---" << std::endl;
+	std::cout << GREEN "---Testing valid bureaucrat instantiation---" RESET << std::endl;
 	try {
 		Bureaucrat Good("Mr. Good", 130);
 		std::cout << Good << std::endl;
@@ -10,7 +10,7 @@ void testInstantiation() {
 		std::cerr << e.what() << std::endl;
 	}
 
-	std::cout << "---Testing invalid bureaucrat instantiation---" << std::endl;
+	std::cout << GREEN "---Testing invalid bureaucrat instantiation---" RESET << std::endl;
 	try {
 		Bureaucrat TooLow("Mr. Toolow", 160);
 	}
@@ -26,7 +26,7 @@ void testInstantiation() {
 }
 
 void testValidGradeMod() {
-	std::cout << "---Testing valid bureaucrat grade modifications---" << std::endl;
+	std::cout << GREEN "---Testing valid bureaucrat grade modifications---" RESET << std::endl;
 
 	Bureaucrat Crement("Mr. Crement", 100);
 	std::cout << Crement << std::endl;
@@ -47,7 +47,7 @@ void testValidGradeMod() {
 }
 
 void testInvalidGradeMod() {
-	std::cout << "---Testing invalid bureaucrat grade modifications---" << std::endl;
+	std::cout << GREEN "---Testing invalid bureaucrat grade modifications---" RESET << std::endl;
 
 	Bureaucrat NoIncrement("Mr. Noincrement", 1);
 	std::cout << NoIncrement << std::endl;

@@ -1,113 +1,93 @@
 #include "Bureaucrat.hpp"
-
-void testInstantiation() {
-	std::cout << "---Testing valid bureaucrat instantiation---" << std::endl;
-	try {
-		Bureaucrat Good("Mr. Good", 130);
-		std::cout << Good << std::endl;
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-
-	std::cout << "---Testing invalid bureaucrat instantiation---" << std::endl;
-	try {
-		Bureaucrat TooLow("Mr. Toolow", 160);
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-	try {
-		Bureaucrat TooHigh("Mr. Toohigh", 0);
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-}
-
-void testValidGradeMod() {
-	std::cout << "---Testing valid bureaucrat grade modifications---" << std::endl;
-
-	Bureaucrat Crement("Mr. Crement", 100);
-	std::cout << Crement << std::endl;
-	try {
-		Crement.decrementGrade();
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-	std::cout << Crement << std::endl;
-	try {
-		Crement.incrementGrade();
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-	std::cout << Crement << std::endl;
-}
-
-void testInvalidGradeMod() {
-	std::cout << "---Testing invalid bureaucrat grade modifications---" << std::endl;
-
-	Bureaucrat NoIncrement("Mr. Noincrement", 1);
-	std::cout << NoIncrement << std::endl;
-	try {
-		NoIncrement.incrementGrade();
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-
-	Bureaucrat NoDecrement("Mr. Nodecrement", 150);
-	std::cout << NoDecrement << std::endl;
-	try {
-		NoDecrement.decrementGrade();
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-}
-
-// void testValidForm() {
-// 	std::cout << "---Testing form creation---" << std::endl;
-// 	try {
-// 		Form tooLow("2Low", -10, 1);
-// 	}
-// 	catch (std::exception &e) {
-// 		std::cout << e.what() << std::endl;
-// 	}
-// 	try {
-// 		Form tooHigh("2High", 1, 160);
-// 	}
-// 	catch (std::exception &e) {
-// 		std::cout << e.what() << std::endl;
-// 	}
-// 	try {
-// 		Form good("Good", 1, 1);
-// 		std::cout << good << std::endl;
-// 	}
-// 	catch (std::exception &e) {
-// 		std::cout << e.what() << std::endl;
-// 	}
-// }
+#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 void testFormSign() {
-	std::cout << "---Testing form signing---" << std::endl;
-	ShrubberyCreationForm formA;
+	std::cout << GREEN "---Testing form signing---" RESET << std::endl;
+
+	Bureaucrat root("Mr. Root", 1);
+	Bureaucrat noob("Mr. Noob", 150);
+	Bureaucrat johnsmith("Mr. Smith", 73);
+
+	ShrubberyCreationForm formA("Test Subject 1");
+	RobotomyRequestForm formB("Test Subject 1");
+	PresidentialPardonForm formC("Test Subject 1");
+
 	std::cout << formA << std::endl;
-	Bureaucrat CanSign("Cansign", 70);
-	CanSign.signForm(formA);
+	std::cout << formB << std::endl;
+	std::cout << formC << std::endl;
 
-	Bureaucrat CanNotSign("Cannotsign", 120);
-	CanNotSign.signForm(formA);
+	root.signForm(formA);
+	root.signForm(formB);
+	root.signForm(formC);
 
+	std::cout << formA << std::endl;
+	std::cout << formB << std::endl;
+	std::cout << formC << std::endl;
+
+	noob.signForm(formA);
+	noob.signForm(formB);
+	noob.signForm(formC);
+
+	johnsmith.signForm(formA);
+	johnsmith.signForm(formB);
+	johnsmith.signForm(formC);
+
+	johnsmith.incrementGrade();
+	johnsmith.signForm(formB);
+}
+
+void testFormExecution() {
+	std::cout << GREEN "---Testing form execution---" RESET << std::endl;
+
+	Bureaucrat root("Mr. Root", 1);
+	Bureaucrat noob("Mr. Noob", 150);
+	Bureaucrat johnsmith("Mr. Smith", 46);
+
+	ShrubberyCreationForm formA("Test Subject 2");
+	RobotomyRequestForm formB("Test Subject 2");
+	PresidentialPardonForm formC("Test Subject 2");
+
+	root.signForm(formA);
+	root.signForm(formB);
+	root.signForm(formC);
+
+	std::cout << formA << std::endl;
+	std::cout << formB << std::endl;
+	std::cout << formC << std::endl;
+
+	root.executeForm(formA);
+	root.executeForm(formB);
+	root.executeForm(formC);
+
+	noob.executeForm(formA);
+	noob.executeForm(formB);
+	noob.executeForm(formC);
+
+	johnsmith.executeForm(formA);
+	johnsmith.executeForm(formB);
+	johnsmith.executeForm(formC);
+
+	johnsmith.incrementGrade();
+	johnsmith.executeForm(formB);
+}
+
+void testUnsignedFormExecution() {
+	std::cout << GREEN "---Testing execution of an unsigned form---" RESET << std::endl;
+	
+	Bureaucrat root("Mr. Root", 1);
+	RobotomyRequestForm formD("Test Subject 3");
+	std::cout << formD << std::endl;
+	root.executeForm(formD);
+	root.signForm(formD);
+	root.executeForm(formD);
 }
 
 int main() {
-	// testInstantiation();
-	// testValidGradeMod();
-	// testInvalidGradeMod();
-	// testValidForm();
 	testFormSign();
+	testFormExecution();
+	testUnsignedFormExecution();
 	return (0);
 }
