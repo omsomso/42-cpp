@@ -28,11 +28,12 @@ double ScalarConverter::doubleMax = std::numeric_limits<double>::max();
 
 long double ScalarConverter::inputLD = 0.0;
 
-ScalarConverter::ScalarConverter(std::string input) {
+ScalarConverter::ScalarConverter(std::string input) : _input(input) {
 	convert(input);
 }
 
 ScalarConverter::ScalarConverter(ScalarConverter const &other) {
+	this->_input = other._input;
 	*this = other;
 }
 
@@ -40,7 +41,7 @@ ScalarConverter::~ScalarConverter() {
 }
 
 ScalarConverter& ScalarConverter::operator=(ScalarConverter const &other) {
-	(void) other;
+	this->_input = other._input;
 	return (*this);
 }
 
@@ -76,10 +77,10 @@ void ScalarConverter::printFloat() {
 	if (inputLD < floatMin || inputLD > floatMax)
 		std::cout << "float: " << "Non displayable" << std::endl;
 	else {
-		float inputFloat = static_cast<float>(inputLD);
-	    std::cout << "float: " << inputFloat << "f" << std::endl;
+		std::cout << "float: " << inputLD << "f" << std::endl;
 	}
 }
+
 void ScalarConverter::printDouble() {
 	if (inputLD < doubleMin || inputLD > doubleMax)
 		std::cout << "double: " << "Non displayable" << std::endl;
@@ -90,6 +91,7 @@ void ScalarConverter::printDouble() {
 }
 
 void ScalarConverter::convert(std::string input) {
+	// setInput(input);
 	ScalarConverter::inputLD = 0;
 	for (int i = 0; i < 6; i++) {
 		if (specialInputs[i] == input) {

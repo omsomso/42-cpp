@@ -21,7 +21,31 @@ $(NAME): $(OBJ)
 
 run : $(NAME)
 	@printf "[$(NAME)]$(GREEN) \t running executable $(END)\n"
-	@./$(NAME)
+	./$(NAME) a
+	@printf "\n"
+	./$(NAME) 42.0
+	@printf "\n"
+	./$(NAME) 42.2f
+	@printf "\n"
+	./$(NAME) -58
+	@printf "\n"
+	./$(NAME) -123817625
+	@printf "\n"
+	./$(NAME) 327865823765827365738256.23576
+	@printf "\n"
+	./$(NAME) 327865823765827365738253427649832749283498237472
+	@printf "\n"
+	./$(NAME) +inf
+	@printf "\n"
+	./$(NAME) +inff
+	@printf "\n"
+	./$(NAME) -inf
+	@printf "\n"
+	./$(NAME) -inff
+	@printf "\n"
+	./$(NAME) nan
+	@printf "\n"
+	./$(NAME) nanf
 
 clean:
 	@rm -f $(OBJ)
