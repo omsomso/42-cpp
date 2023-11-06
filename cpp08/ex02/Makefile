@@ -1,5 +1,5 @@
-NAME	=	ex00
-SRC 	= 	main.cpp
+NAME	=	ex01
+SRC 	= 	main.cpp MutantStack.cpp
 
 CC 		=	c++
 CFLAGS	=	-Werror -Wall -Wextra -std=c++98
