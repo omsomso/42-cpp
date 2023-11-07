@@ -4,32 +4,44 @@ CFLAGS	=	-Werror -Wall -Wextra -std=c++98
 SRC 	= 	main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJ		=	$(SRC:.cpp=.o)
 
-GREEN=\033[0;32m
-RED=\033[0;31m
-BLUE=\033[0;34m
-END=\033[0m
+GREEN	=	\033[0;32m
+RED		=	\033[0;31m
+BLUE	=	\033[0;34m
+ORANGE	=	\033[33m
+GREY	=	\033[90m
+END		=	\033[0m
+
+MSGOBJ=@printf "$(END)[$(NAME)]$(GREEN) creating object files...$(GREY)\n"
+MSGEXE=@printf "$(END)[$(NAME)]$(GREEN) creating executable...$(GREY)\n"
+MSGRUN=@printf "$(END)[$(NAME)]$(GREEN) running executable$(END)\n"
+MSGRES=@printf "$(END)[$(NAME)]$(GREEN) recompiling...$(END)\n"
+MSGREC=@printf "$(END)[$(NAME)]$(GREEN) complete :)$(END)\n"
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@printf "[$(NAME)]$(GREEN) \t creating executable... $(END)\n"
+	$(MSGEXE)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-%.o : %.cpp
-	@printf "[$(NAME)]$(GREEN) \t creating object files... $(END)\n"
+
+%.o : %.cpp msgobj
 	$(CC) -c $(CFLAGS) $< -o $@
 
 run : $(NAME)
-	@printf "[$(NAME)]$(GREEN) \t running executable $(END)\n"
-	@./$(NAME)
+	$(MSGRUN)
+	./$(NAME)
 
 clean:
-	@rm -f $(OBJ)
-	@printf "[$(NAME)]$(GREEN) \t object files removed $(END)\n"
+	rm -f $(OBJ)
 
 fclean: clean
-	@rm -f $(NAME)
-	@printf "[$(NAME)]$(GREEN) \t $(NAME) removed $(END)\n"
+	rm -f $(NAME)
 
-re: fclean all
-	@printf "[$(NAME)] $(GREEN) \t complete :) $(END)\n"
+re: msgres fclean all
+	$(MSGREC)
+
+msgobj:
+	$(MSGOBJ)
+
+msgres:
+	$(MSGRES)

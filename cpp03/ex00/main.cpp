@@ -10,7 +10,6 @@ int	main(void) {
 	robot_1.takeDamage(0);
 	robot_1.beRepaired(1);
 	robot_3.attack("Robocop");
-	std::cout << "It's super effective!" << std::endl;
 	robot_1.takeDamage(0);
 	std::cout << "----End Fight----" << std::endl;
 	
