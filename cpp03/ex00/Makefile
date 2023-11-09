@@ -11,11 +11,11 @@ ORANGE	=	\033[33m
 GREY	=	\033[90m
 END		=	\033[0m
 
-MSGOBJ=@printf "$(GREY)"
-MSGEXE=@printf "$(END)[$(NAME)]$(GREEN) creating executable...$(GREY)\n"
-MSGRUN=@printf "$(END)[$(NAME)]$(GREEN) running executable$(END)\n"
-MSGRES=@printf "$(END)[$(NAME)]$(GREEN) recompiling...$(END)\n"
-MSGREC=@printf "$(END)[$(NAME)]$(GREEN) complete :)$(END)\n"
+MSGOBJ=@printf "$(END)$(GREEN)creating object files...$(GREY)\n"
+MSGEXE=@printf "$(END)$(GREEN)creating executable...$(GREY)\n"
+MSGRUN=@printf "$(END)$(GREEN)running executable$(END)\n"
+MSGRES=@printf "$(END)$(GREEN)recompiling...$(END)\n"
+MSGREC=@printf "$(END)$(GREEN)complete :)$(END)\n"
 
 all: $(NAME)
 
@@ -37,7 +37,7 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all
+re: fclean msgres all 
 	$(MSGREC)
 
 msgres:

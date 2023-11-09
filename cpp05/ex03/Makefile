@@ -11,7 +11,7 @@ ORANGE	=	\033[33m
 GREY	=	\033[90m
 END		=	\033[0m
 
-MSGOBJ=@printf "$(GREY)"
+MSGOBJ=@printf "$(END)$(GREEN)creating object files...$(GREY)\n"
 MSGEXE=@printf "$(END)$(GREEN)creating executable...$(GREY)\n"
 MSGRUN=@printf "$(END)$(GREEN)running executable$(END)\n"
 MSGRES=@printf "$(END)$(GREEN)recompiling...$(END)\n"

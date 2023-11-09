@@ -17,13 +17,12 @@ class ScalarConverter {
 	static float floatMax;
 	static double doubleMin;
 	static double doubleMax;
-
-	public :
 	ScalarConverter(std::string input);
 	ScalarConverter(ScalarConverter const &other);
 	~ScalarConverter();
 	ScalarConverter &operator=(ScalarConverter const &other);
 
+	public :
 	static void convert(std::string input);
 	static void printSpecialValues(double specialInput);
 	static void printChar();

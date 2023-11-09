@@ -6,7 +6,6 @@ void toApper(char& c) {
 }
 
 int main() {
-
 	std::cout << GREEN "Testing string and toApper" RESET << std::endl;
 
 	std::string test = "coucou world!";

@@ -4,7 +4,7 @@
 #define MAX_VAL 21
 int main(int, char**) {
 	std::cout << GREEN "main.cpp tests provided in the subject" RESET << std::endl;
-	std::cout << GREEN "Creating int array and its mirror with " << MAX_VAL << " random values" << std::endl;
+	std::cout << "Creating int array and its mirror with " << MAX_VAL << " random values" << std::endl;
 	std::cout << "Printing max. 10 first values" << std::endl;
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];

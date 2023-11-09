@@ -12,11 +12,11 @@ ORANGE	=	\033[33m
 GREY	=	\033[90m
 END		=	\033[0m
 
-MSGOBJ=@printf "$(END)[$(NAME)]$(GREEN) creating object files...$(GREY)\n"
-MSGEXE=@printf "$(END)[$(NAME)]$(GREEN) creating executable...$(GREY)\n"
-MSGRUN=@printf "$(END)[$(NAME)]$(GREEN) running executable$(END)\n"
-MSGRES=@printf "$(END)[$(NAME)]$(GREEN) recompiling...$(END)\n"
-MSGREC=@printf "$(END)[$(NAME)]$(GREEN) complete :)$(END)\n"
+MSGOBJ=@printf "$(END)$(GREEN)creating object files...$(GREY)\n"
+MSGEXE=@printf "$(END)$(GREEN)creating executable...$(GREY)\n"
+MSGRUN=@printf "$(END)$(GREEN)running executable$(END)\n"
+MSGRES=@printf "$(END)$(GREEN)recompiling...$(END)\n"
+MSGREC=@printf "$(END)$(GREEN)complete :)$(END)\n"
 
 all: $(NAME)
 
@@ -24,11 +24,11 @@ $(NAME): $(OBJ)
 	$(MSGEXE)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-
-%.o : %.cpp msgobj
+%.o : %.cpp
+	$(MSGOBJ)
 	$(CC) -c $(CFLAGS) $< -o $@
 
-run : $(NAME)
+run: $(NAME)
 	$(MSGRUN)
 	./$(NAME)
 
@@ -38,11 +38,8 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: msgres fclean all
+re: fclean msgres all 
 	$(MSGREC)
-
-msgobj:
-	$(MSGOBJ)
 
 msgres:
 	$(MSGRES)

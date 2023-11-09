@@ -20,19 +20,19 @@ ScavTrap::~ScavTrap() {
 
 }
 
-// ScavTrap::ScavTrap(const ScavTrap &other) {
-// 	std::cout << "ScavTrap copy constructor called for " << other._name << std::endl;
-// 	*this = other;
-// }
+ScavTrap::ScavTrap(const ScavTrap &other) {
+	std::cout << "ScavTrap copy constructor called for " << other._name << std::endl;
+	*this = other;
+}
 
-// ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
-// 	std::cout << "ScavTrap copy assignment operator called" << std::endl;
-// 	this->_name = other._name;
-// 	this->_hitPoints = other._hitPoints;
-// 	this->_energyPoints = other._energyPoints;
-// 	this->_attackDamage = other._attackDamage;
-// 	return (*this);
-// }
+ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
+	std::cout << "ScavTrap copy assignment operator called" << std::endl;
+	this->_name = other._name;
+	this->_hitPoints = other._hitPoints;
+	this->_energyPoints = other._energyPoints;
+	this->_attackDamage = other._attackDamage;
+	return (*this);
+}
 
 void ScavTrap::attack(const std::string& target) {
 	std::cout << "ScavTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
