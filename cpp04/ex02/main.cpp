@@ -6,14 +6,14 @@ int main(void) {
 
 	// Animal compilationError;
 
-	std::cout << "----Leak test----" << std::endl << std::endl;
+	std::cout << ORANGE "Leak test" RESET << std::endl;
 
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 	delete j;//should not create a leak
 	delete i;
 
-	std::cout << std::endl << "----Array test----" << std::endl << std::endl;
+	std::cout << ORANGE "Array test" RESET << std::endl;
 
 	int nb_animals = 4;
 	Animal **animalArray;
@@ -33,7 +33,7 @@ int main(void) {
 
 	// Deep copy with Cat objects
 
-	std::cout << std::endl << "----Deep copy test----" << std::endl << std::endl;
+	std::cout << ORANGE "Deep copy test" RESET << std::endl;
 	
 	std::cout << "--Source cat with ideas--" << std::endl;
 	Cat* copycat_src = new Cat();

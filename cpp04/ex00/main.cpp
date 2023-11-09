@@ -4,7 +4,7 @@
 #include "WrongAnimal.hpp"
 
 int main(void) {
-	std::cout << "----Required tests----" << std::endl;
+	std::cout << ORANGE "Required tests" RESET << std::endl;
 	const Animal* meta = new Animal();
 	const Animal* i = new Cat();
 	const Animal* j = new Dog();
@@ -19,7 +19,7 @@ int main(void) {
 	delete(i);
 	delete(j);
 
-	std::cout << std::endl << "----Wrong tests----" << std::endl;
+	std::cout << ORANGE "Wrong tests" RESET << std::endl;
 	const WrongAnimal* meta_wrong = new WrongAnimal();
 	const WrongAnimal* i_wrong = new WrongCat();
 
@@ -30,7 +30,7 @@ int main(void) {
 	delete(meta_wrong);
 	delete(i_wrong);
 
-	std::cout << std::endl << "----My tests----" << std::endl;
+	std::cout << ORANGE "My tests" RESET << std::endl;
 	Animal some_critter;
 	Dog barker;
 	Cat filomena;

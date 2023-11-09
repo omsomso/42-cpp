@@ -11,7 +11,7 @@ ORANGE	=	\033[33m
 GREY	=	\033[90m
 END		=	\033[0m
 
-MSGOBJ=@printf "$(END)[$(NAME)]$(GREEN) creating object files...$(GREY)\n"
+MSGOBJ=@printf "$(GREY)"
 MSGEXE=@printf "$(END)[$(NAME)]$(GREEN) creating executable...$(GREY)\n"
 MSGRUN=@printf "$(END)[$(NAME)]$(GREEN) running executable$(END)\n"
 MSGRES=@printf "$(END)[$(NAME)]$(GREEN) recompiling...$(END)\n"
@@ -23,11 +23,11 @@ $(NAME): $(OBJ)
 	$(MSGEXE)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-
-%.o : %.cpp msgobj
+%.o : %.cpp
+	$(MSGOBJ)
 	$(CC) -c $(CFLAGS) $< -o $@
 
-run : $(NAME)
+run: $(NAME)
 	$(MSGRUN)
 	./$(NAME)
 
@@ -37,11 +37,8 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: msgres fclean all
+re: fclean all
 	$(MSGREC)
-
-msgobj:
-	$(MSGOBJ)
 
 msgres:
 	$(MSGRES)

@@ -3,6 +3,9 @@
 
 # include <iostream>
 
+#define ORANGE "\033[33m"
+#define RESET "\033[0m"
+
 class Animal {
 	protected :
 	std::string type;
@@ -18,21 +21,6 @@ class Animal {
 	virtual void makeSound() const ;
 	virtual void setBrain();
 	virtual void printBrain();
-};
-
-class Brain {
-	private :
-	std::string ideas[100];
-	
-	public :
-	Brain();
-	Brain(const Brain &other);
-	Brain& operator=(const Brain& other);
-	~Brain();
-
-	std::string* getIdeas();
-	void printIdeas();
-	void setIdeas(std::string idea);
 };
 
 #endif

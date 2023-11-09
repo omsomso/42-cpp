@@ -1,23 +1,31 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm() : Form("Robotomy Request Form", 72, 45), target("Default target") {
+RobotomyRequestForm::RobotomyRequestForm() : AForm("Robotomy Request Form", 72, 45) {
+	this->setTarget("Default target");
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : Form("Robotomy Request Form", 72, 45), target(target) {
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("Robotomy Request Form", 72, 45) {
+	this->setTarget(target);
 }
 
-std::string RobotomyRequestForm::getTarget() const {
-	return (this->target);
+RobotomyRequestForm::~RobotomyRequestForm() {}
+
+RobotomyRequestForm& RobotomyRequestForm::operator=(RobotomyRequestForm &other) {
+	this->setTarget(other.getTarget());
+	this->setSignedStatus(other.getSignedStatus());
+	return (*this);
 }
 
-void RobotomyRequestForm::execute(std::string target) {
+void RobotomyRequestForm::execute(Bureaucrat const& executor) const {
+	if (!this->getSignedStatus())
+		throw UnsignedFormException();
+	if (executor.getGrade() > this->getGradeExec())
+		throw GradeTooLowException();
 	std::cout << "*some drilling noises*" << std::endl;
-	srand(static_cast<unsigned>(time(0)));
+	srand(clock());
 	int random = rand() % 2;
-	if (random == 0) {
-		std::cout << target << " has been robotomized successfully." << std::endl;
-	}
-	else {
-		std::cout << target << " robotomization failed." << std::endl;
-	}
+	if (random == 0)
+		std::cout << this->getTarget() << " has been robotomized successfully." << std::endl;
+	else
+		std::cout << this->getTarget() << " robotomization failed." << std::endl;
 }

@@ -4,6 +4,9 @@
 # include <iostream>
 # include <string>
 
+#define ORANGE "\033[33m"
+#define RESET "\033[0m"
+
 class ClapTrap
 {
 	protected :

@@ -3,17 +3,16 @@
 
 #include <ctime> // for time()
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
-class RobotomyRequestForm : public Form {
-	private :
-	const std::string target;
-
+class RobotomyRequestForm : public AForm {
 	public :
 	RobotomyRequestForm();
 	RobotomyRequestForm(std::string target);
-	virtual std::string getTarget() const;
-	static void execute(std::string target);
+	~RobotomyRequestForm();
+	RobotomyRequestForm& operator=(RobotomyRequestForm &other);
+
+	void execute(Bureaucrat const& executor) const ;
 };
 
 #endif

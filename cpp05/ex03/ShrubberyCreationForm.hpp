@@ -3,20 +3,19 @@
 
 #include <fstream> // for files
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
 # define ASCIITREE ".\n                                              .         ;  \n                 .              .              ;%     ;;   \n                   ,           ,                :;%  %;   \n                    :         ;                   :;%;'     .,   \n           ,.        %;     %;            ;        %;'    ,;\n             ;       ;%;  %%;        ,     %;    ;%;    ,%'\n              %;       %;%;      ,  ;       %;  ;%;   ,%;' \n               ;%;      %;        ;%;        % ;%;  ,%;'\n                `%;.     ;%;     %;'         `;%%;.%;'\n                 `:;%.    ;%%. %@;        %; ;@%;%'\n                    `:%;.  :;bd%;          %;@%;'\n                      `@%:.  :;%.         ;@@%;'   \n                        `@%.  `;@%.      ;@@%;         \n                          `@%%. `@%%    ;@@%;        \n                            ;@%. :@%%  %@@%;       \n                              %@bd%%%bd%%:;     \n                                #@%%%%%:;;\n                                %@@%%%::;\n                                %@@@%(o);  . '         \n                                %@@@o%;:(.,'         \n                            `.. %@@@o%::;         \n                               `)@@@o%::;         \n                                %@@(o)::;        \n                               .%@@@@%::;         \n                               ;%@@@@%::;.          \n                              ;%@@@@%%:;;;. \n                          ...;%@@@@@%%:;;;;,..\n"
 
 
-class ShrubberyCreationForm : public Form {
-	private :
-	const std::string target;
-
+class ShrubberyCreationForm : public AForm {
 	public :
 	ShrubberyCreationForm();
 	ShrubberyCreationForm(std::string target);
-	virtual std::string getTarget() const;
-	static void execute(std::string target);
+	~ShrubberyCreationForm();
+	ShrubberyCreationForm& operator=(ShrubberyCreationForm &other);
+
+	void execute(Bureaucrat const& executor) const ;
 };
 
 #endif

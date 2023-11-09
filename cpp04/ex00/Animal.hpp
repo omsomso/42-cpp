@@ -3,6 +3,9 @@
 
 # include <iostream>
 
+#define ORANGE "\033[33m"
+#define RESET "\033[0m"
+
 class Animal {
 	protected :
 	std::string type;

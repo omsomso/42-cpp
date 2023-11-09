@@ -1,12 +1,12 @@
 #include "Dog.hpp"
 
 Dog::Dog() : Animal("Dog") {
-	dogBrain = new Brain;
+	_dogBrain = new Brain;
 	// this->setBrain();
 }
 
 Dog::Dog(std::string type) : Animal(type) {
-	dogBrain = new Brain;
+	_dogBrain = new Brain;
 }
 
 Dog::Dog(Dog& other) {
@@ -17,15 +17,15 @@ Dog::Dog(Dog& other) {
 Dog& Dog::operator=(Dog& other) {
 	std::cout << "Dog copy assignment operator called" << std::endl;
 	this->type = other.type;
-	delete this->dogBrain;
-	this->dogBrain = new Brain;
-	*this->dogBrain = *other.dogBrain;
+	delete this->_dogBrain;
+	this->_dogBrain = new Brain;
+	*this->_dogBrain = *other._dogBrain;
 	return (*this);
 }
 
 Dog::~Dog() {
 	std::cout << "Deleting dogBrain..." << std::endl;
-	delete dogBrain;
+	delete _dogBrain;
 }
 
 void Dog::makeSound() const {
@@ -33,9 +33,9 @@ void Dog::makeSound() const {
 }
 
 void Dog::setBrain() {
-	dogBrain->setIdeas("treats");
+	_dogBrain->setIdeas("treats");
 }
 
 void Dog::printBrain() {
-	this->dogBrain->printIdeas();
+	this->_dogBrain->printIdeas();
 }

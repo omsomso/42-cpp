@@ -5,9 +5,7 @@
 #include <stack>
 #include <algorithm>
 
-#define GREEN "\033[0;32m"
 #define ORANGE "\033[33m"
-#define BLUE "\033[34m"
 #define RESET "\033[0m"
 
 template <typename TYPE>

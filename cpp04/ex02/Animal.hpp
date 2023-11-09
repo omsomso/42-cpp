@@ -2,6 +2,10 @@
 # define ANIMAL_HPP
 
 # include <iostream>
+# include "Brain.hpp"
+
+# define ORANGE "\033[33m"
+# define RESET "\033[0m"
 
 class Animal {
 	protected :
@@ -18,21 +22,6 @@ class Animal {
 	virtual void makeSound() const = 0;
 	virtual void setBrain();
 	virtual void printBrain();
-};
-
-class Brain {
-	private :
-	std::string ideas[100];
-	
-	public :
-	Brain();
-	Brain(const Brain &other);
-	Brain& operator=(const Brain& other);
-	~Brain();
-
-	std::string* getIdeas();
-	void printIdeas();
-	void setIdeas(std::string idea);
 };
 
 #endif

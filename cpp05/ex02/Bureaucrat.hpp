@@ -1,20 +1,20 @@
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
-#include <iostream>
-#include <cstdlib> // for rand()
+# include <iostream>
+# include <cstdlib> // for rand()
 
-#include "Form.hpp"
+# include "AForm.hpp"
 
 #define GREEN "\033[0;32m"
 #define RESET "\033[0m"
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 	private :
-	const std::string name;
-	int grade;
+	const std::string _name;
+	int _grade;
 
 	public :
 	Bureaucrat();
@@ -28,8 +28,8 @@ class Bureaucrat {
 	int getGrade() const;
 	void incrementGrade();
 	void decrementGrade();
-	void signForm(Form& form) const;
-	void executeForm(Form const& form) const;
+	void signForm(AForm& form) const;
+	void executeForm(AForm const& form) const;
 
 	class GradeTooLowException : public std::exception {
 		virtual const char *what() const throw();

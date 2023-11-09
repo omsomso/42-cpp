@@ -1,17 +1,26 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm() : Form("Shrubbery Creation Form", 147, 137), target("Default target") {
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Shrubbery Creation Form", 147, 137) {
+	this->setTarget("Default target");
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form("Shrubbery Creation Form", 147, 137), target(target) {
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("Shrubbery Creation Form", 147, 137) {
+	this->setTarget(target);
 }
 
-std::string ShrubberyCreationForm::getTarget() const {
-	return (this->target);
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(ShrubberyCreationForm &other) {
+	this->setTarget(other.getTarget());
+	this->setSignedStatus(other.getSignedStatus());
+	return (*this);
 }
 
-void ShrubberyCreationForm::execute(std::string target) {
-	std::ofstream outFile;
-	outFile.open(target.append("_shrubbery"), std::ios::out);
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
+
+void ShrubberyCreationForm::execute(Bureaucrat const& executor) const {
+	if (!this->getSignedStatus())
+		throw UnsignedFormException();
+	if (executor.getGrade() > this->getGradeExec())
+		throw GradeTooLowException();	std::ofstream outFile;
+	outFile.open(this->getTarget().append("_shrubbery"), std::ios::out);
 	outFile << ASCIITREE << std::endl;
 }

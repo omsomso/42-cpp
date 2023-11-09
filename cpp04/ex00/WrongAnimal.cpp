@@ -40,5 +40,5 @@ WrongCat::WrongCat(std::string type) : WrongAnimal(type) {
 }
 
 void WrongCat::makeSound() const {
-	std::cout << "*judges you silently*" << std::endl;
+	std::cout << "meeeoaaaw" << std::endl;
 }

@@ -1,12 +1,12 @@
 #include "Cat.hpp"
 
 Cat::Cat() : Animal("Cat") {
-	catBrain = new Brain;
+	_catBrain = new Brain;
 	// this->setBrain();
 }
 
 Cat::Cat(std::string type) : Animal(type) {
-	catBrain = new Brain;
+	_catBrain = new Brain;
 }
 
 Cat::Cat(Cat& other) {
@@ -17,15 +17,15 @@ Cat::Cat(Cat& other) {
 Cat& Cat::operator=(Cat& other) {
 	std::cout << "Cat copy assignment operator called" << std::endl;
 	this->type = other.type;
-	delete this->catBrain;
-	this->catBrain = new Brain;
-	*this->catBrain = *other.catBrain;
+	delete this->_catBrain;
+	this->_catBrain = new Brain;
+	*this->_catBrain = *other._catBrain;
 	return (*this);
 }
 
 Cat::~Cat() {
 	std::cout << "Deleting catBrain..." << std::endl;
-	delete catBrain;
+	delete _catBrain;
 }
 
 void Cat::makeSound() const {
@@ -33,9 +33,9 @@ void Cat::makeSound() const {
 }
 
 void Cat::setBrain() {
-	catBrain->setIdeas("sleep");
+	_catBrain->setIdeas("sleep");
 }
 
 void Cat::printBrain() {
-	this->catBrain->printIdeas();
+	this->_catBrain->printIdeas();
 }

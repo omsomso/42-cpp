@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Intern.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
@@ -13,9 +13,9 @@ void testFormSign() {
 	Bureaucrat johnsmith("Mr. Smith", 73);
 	Intern randomIntern;
 
-	Form *formA = randomIntern.makeForm("Shrubbery Creation Form", "Test Subject 1");
-	Form *formB = randomIntern.makeForm("Robotomy Request Form", "Test Subject 1");
-	Form *formC = randomIntern.makeForm("Presidential Pardon Form", "Test Subject 1");
+	AForm *formA = randomIntern.makeForm("Shrubbery Creation Form", "Test Subject 1");
+	AForm *formB = randomIntern.makeForm("Robotomy Request Form", "Test Subject 1");
+	AForm *formC = randomIntern.makeForm("Presidential Pardon Form", "Test Subject 1");
 
 	std::cout << *formA << std::endl;
 	std::cout << *formB << std::endl;
@@ -53,9 +53,9 @@ void testFormExecution() {
 	Bureaucrat johnsmith("Mr. Smith", 46);
 	Intern randomIntern;
 
-	Form *formA = randomIntern.makeForm("Shrubbery Creation Form", "Test Subject 2");
-	Form *formB = randomIntern.makeForm("Robotomy Request Form", "Test Subject 2");
-	Form *formC = randomIntern.makeForm("Presidential Pardon Form", "Test Subject 2");
+	AForm *formA = randomIntern.makeForm("Shrubbery Creation Form", "Test Subject 2");
+	AForm *formB = randomIntern.makeForm("Robotomy Request Form", "Test Subject 2");
+	AForm *formC = randomIntern.makeForm("Presidential Pardon Form", "Test Subject 2");
 
 	root.signForm(*formA);
 	root.signForm(*formB);
@@ -81,7 +81,7 @@ void testFormExecution() {
 	johnsmith.executeForm(*formB);
 
 	std::cout << GREEN "---Testing execution of an unsigned form---" RESET << std::endl;
-	Form *formD = randomIntern.makeForm("Robotomy Request Form", "Test Subject 3");
+	AForm *formD = randomIntern.makeForm("Robotomy Request Form", "Test Subject 3");
 	std::cout << *formD << std::endl;
 	root.executeForm(*formD);
 	root.signForm(*formD);
