@@ -11,12 +11,10 @@ class Btc {
 	private:
 		std::map<time_t, float> _db;
 		std::map<time_t, float> _input;
-
-		Btc();
-		Btc(Btc& other);
-		~Btc();
-		Btc& operator=(Btc& other);
-
+		time_t _inDate;
+		float _inVal;
+		std::ifstream _inFile;
+		
 		void printDb();
 		void printInput();
 		bool isLeap(long year);
@@ -31,6 +29,11 @@ class Btc {
 		int initDatabase(std::string dbFileName);
 
 	public:
+		Btc();
+		Btc(Btc& other);
+		~Btc();
+		Btc& operator=(Btc& other);
+
 		static int convert(std::string input);
 };
 

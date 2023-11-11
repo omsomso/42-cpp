@@ -22,8 +22,10 @@ time_t Btc::parseDate(const char* dateString, const char* format)
 	strptime(dateString, format, &tmStruct);
 	// std::cout << "year : " << tmStruct.tm_year << " month : " << tmStruct.tm_mon << " day : " << tmStruct.tm_mday << std::endl;
 	time_t t = mktime(&tmStruct);
-	if (t == -1)
-		std::cerr << "Error : mktime failed" << std::endl;
+	if (t == -1) {
+		std::cerr << "Error : invalid date - mktime failed" << std::endl;
+		return (-1);
+	}
 	return (t);
 }
 
@@ -55,6 +57,8 @@ int Btc::parseDbLine(std::string& line) {
 		return (0);
 	}
 	time_t date = parseDate(&strDate[0], "%Y-%m-%d");
+	if (date == -1)
+		return (-1);
 	float val = std::stof(strVal);
 	_db.insert(std::pair<time_t, float>(date, val));
 	line.clear();
@@ -112,6 +116,18 @@ bool Btc::isValidDate(long day, long month, long year) {
 }
 
 bool Btc::checkValidDate(std::string line) {
+	if (line.find_first_of("-") != 4) {
+		std::cerr << "Error : query date invalid => " << line << std::endl;
+		return (false);
+	}
+	if (line.substr(5).find_first_of("-") != 2) {
+		std::cerr << "Error : query date invalid => " << line << std::endl;
+		return (false);
+	}
+	if (line.substr(8).find_first_of("|") != 3 && line.substr(8).find_first_of(",") != 2) {
+		std::cerr << "Error : query date invalid => " << line << std::endl;
+		return (false);
+	}
 	std::string yearStr = line.substr(0, 4);
 	std::string monthStr = line.substr(5, 2);
 	std::string dayStr = line.substr(8, 2);
@@ -123,15 +139,20 @@ bool Btc::checkValidDate(std::string line) {
 	}
 	catch (std::exception &e) {
 		std::cerr << "Error : invalid date format" << std::endl;
+		return (false);
 	}
 	yearLng = stol(yearStr);
 	monthLng = stol(monthStr);
 	dayLng = stol(dayStr);
-	if (!isValidDate(dayLng, monthLng, yearLng)) {
-		std::cerr << "Error: invalid date" << std::endl;
-		return (0);
+	if (yearLng > 2100 || yearLng < 1970) {
+		std::cerr << "No luck gringo" << std::endl;
+		return (false);
 	}
-    return (1);
+	if (!isValidDate(dayLng, monthLng, yearLng)) {
+		std::cerr << "Error: invalid date => " << dayLng << "-" << monthLng << "-" << dayLng << std::endl;
+		return (false);
+	}
+    return (true);
 }
 
 int Btc::parseInLine(std::string line) {
@@ -144,7 +165,7 @@ int Btc::parseInLine(std::string line) {
 	if (strVal.length() >= 3)
 		strVal = line.substr(line.find("| ") + 2);
 	else {
-		std::cerr << "Error : no value in query" << std::endl;
+		std::cerr << "Error : no query value for query date => " << strDate << std::endl;
 		return (1);
 	}
 	if (strDate.empty() || strVal.empty()) {
@@ -156,7 +177,16 @@ int Btc::parseInLine(std::string line) {
 		(void) val;
 	}
 	catch (std::exception &e) {
-		std::cerr << "Error : float value error in input file" << std::endl;
+		std::cerr << "Error : query value error => " << strVal << std::endl;
+		return (1);
+	}
+	if (strDate.find_first_not_of("-1234567890") != std::string::npos) {
+		std::cerr << "Error : query date invalid => " << strDate << std::endl;
+		return (1);
+	}
+	if (strVal.find_first_not_of("1234567890.") != std::string::npos) {
+		std::cerr << "Error : query value invalid => " << strVal << std::endl;
+		return (1);
 	}
 	if (strDate.empty() || strVal.empty()) {
 		std::cerr << "str empty" << std::endl;
@@ -164,33 +194,37 @@ int Btc::parseInLine(std::string line) {
 	}
 	float val = std::stof(strVal);
 	if (val < 0 || val >= 1000) {
-		std::cerr << "Error : query value out of bounds (0 - 1000)" << std::endl;
+		std::cerr << "Error : query value out of bounds (0 - 1000) => " << val << std::endl;
 		return (1);
 	}
 	time_t date = parseDate(&strDate[0], "%Y-%m-%d");
-	_input.insert(std::pair<time_t, float>(date, val));
+	if (date == -1)
+		return (-1);
+	// std::cout << "val = " << val << std::endl;
+	// _input.insert(std::pair<time_t, float>(date, val));
+	_inDate = date;
+	_inVal = val;
 	line.clear();
 	return (0);
 }
 
 int Btc::initInput(std::string inFileName) {
-	std::ifstream inFile;
-	inFile.open(inFileName);
-	if (!inFile) {
+	_inFile.open(inFileName);
+	if (!_inFile) {
 		std::cerr << "Error : couldn't open input file" << std::endl;
 		return (1);
 	}
 
 	std::string line;
-	std::getline(inFile, line);
+	std::getline(_inFile, line);
 	if (line != "date | value") {
 		std::cerr << "Error : invalid query header" << std::endl;
 		return (1);
 	}
 	line.clear();
-	while (std::getline(inFile, line))
-		if (parseInLine(line))
-			return (1);
+	// while (std::getline(_inFile, line))
+	// 	if (parseInLine(line))
+	// 		return (1);
 	return (0);
 }
 
@@ -204,12 +238,27 @@ int Btc::convert(std::string input) {
 	float qval = 0;
 	time_t date;
 	std::map<time_t, float>::iterator found;
-	for (std::map<time_t, float>::iterator it = exchange._input.begin(); it != exchange._input.end(); ++it) {
-		found = exchange._db.lower_bound(it->first);
-		date = found->first;
-		val = found->second;
-		qval = it->second;
-		std::cout << exchange.outputDateStr(date, "%Y-%m-%d") << " => " << it->second << " = " << val * qval << std::endl;
+	std::string line;
+	while (std::getline(exchange._inFile, line)) {
+		// std::cout << line << std::endl;
+		if (!exchange.parseInLine(line) && !line.empty()) {
+			found = exchange._db.upper_bound(exchange._inDate);
+			found--;
+			date = found->first;
+			val = found->second;
+			qval = exchange._inVal;
+			// std::cout << "val to eval = " << qval << std::endl;
+			std::cout << exchange.outputDateStr(date, "%Y-%m-%d") << " => " << exchange._inVal << " = " << val * qval << std::endl;
+			line.clear();
+			// set = true;
+		}
 	}
+	// for (std::map<time_t, float>::iterator it = exchange._input.begin(); it != exchange._input.end(); ++it) {
+	// 	found = exchange._db.lower_bound(it->first);
+	// 	date = found->first;
+	// 	val = found->second;
+	// 	qval = it->second;
+	// 	std::cout << exchange.outputDateStr(date, "%Y-%m-%d") << " => " << it->second << " = " << val * qval << std::endl;
+	// }
 	return (0);
 }

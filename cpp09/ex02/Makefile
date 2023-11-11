@@ -1,5 +1,5 @@
-NAME	=	RPN
-SRC 	= 	main.cpp RPN.cpp
+NAME	=	PmergeMe
+SRC 	= 	main.cpp BitcoinExchange.cpp
 
 CC 		=	c++
 CFLAGS	=	-Werror -Wall -Wextra -std=c++98 -g3
@@ -30,12 +30,7 @@ $(NAME): $(OBJ)
 
 run: $(NAME)
 	$(MSGRUN)
-	./$(NAME) "7 7 * 7 -"
-	./$(NAME) "8 9 * 9 - 9 - 9 - 4 - 1 +"
-	./$(NAME) "1 2 * 2 / 2 * 2 4 - +"
-	./$(NAME) "( 1 + 1 )"
-	./$(NAME) "1 2 * 2 / 2 + 5 * 6 - 1 3 * - 4 5 * * 8 /"
-	./$(NAME) "2 0 /"
+	./$(NAME) query
 
 clean:
 	rm -f $(OBJ)

@@ -11,6 +11,6 @@ int main(int ac, char** av) {
 	}
 	std::string input = av[1];
 	if (Btc::convert(input))
-		return (1);
+		return (0);
 	return (0);
 }
