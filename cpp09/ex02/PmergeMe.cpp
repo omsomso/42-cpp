@@ -1,5 +1,19 @@
 #include "PmergeMe.hpp"
 
+PmergeMe::PmergeMe() {}
+		
+PmergeMe::PmergeMe(PmergeMe& other) {
+	*this = other;
+}
+
+PmergeMe::~PmergeMe() {}
+
+PmergeMe& PmergeMe::operator=(PmergeMe& other) {
+	this->_vecVals = other._vecVals;
+	this->_lstVals = other._lstVals;
+	return (*this);
+}
+
 void PmergeMe::vecInsertionSort(int begin, int end) {
 	for (int current = begin; current < end; current++) {
 		int tempVal = _vecVals[current + 1];

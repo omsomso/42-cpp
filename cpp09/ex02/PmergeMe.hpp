@@ -20,9 +20,15 @@ class PmergeMe {
 		std::list<int> _lstVals;
 		std::vector<int> _vecVals;
 		timeval _vecStart, _vecEnd, _lstStart, _lstEnd;
-
-
-	public:
+		//class
+		PmergeMe();
+		PmergeMe(PmergeMe& other);
+		~PmergeMe();
+		PmergeMe& operator=(PmergeMe& other);
+		// parser
+		int checkInput(char** av);
+		int parseVecInput(char** av);
+		int parseLstInput(char** av);
 		// sort
 		void vecInsertionSort(int p, int r);
 		void vecMerge(int const left, int const mid, int const right);
@@ -31,19 +37,16 @@ class PmergeMe {
 		void lstMerge(int const left, int const mid, int const right);
 		void lstMergeInsertionSort(int const begin, int const end);
 		bool isValidInput(std::string input);
-		static int sort(char** av);
-
-		// parser
-		int checkInput(char** av);
-		int parseVecInput(char** av);
-		int parseLstInput(char** av);
-		
 		// utils
 		void writeTime();
 		void printVec();
 		void printLst();
 		bool checkVecSort();
 		bool checkLstSort();
+
+	public:
+		// sort
+		static int sort(char** av);
 };
 
 #endif
