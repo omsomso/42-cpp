@@ -23,6 +23,10 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(MSGEXE)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@curl https://cdn.intra.42.fr/document/document/20227/cpp_09.tgz --output cpp_09.tgz
+	@tar -xf cpp_09.tgz
+	@mv cpp_09/data.csv .
+	@rm -rf cpp_09 cpp_09.tgz
 
 %.o : %.cpp
 	$(MSGOBJ)
@@ -31,12 +35,14 @@ $(NAME): $(OBJ)
 run: $(NAME)
 	$(MSGRUN)
 	./$(NAME) query
+	@printf "\n"
+	./$(NAME) input.txt
 
 clean:
 	rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) data.csv
 
 re: fclean msgres all 
 	$(MSGREC)

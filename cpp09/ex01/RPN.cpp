@@ -135,7 +135,7 @@ int Rpn::calculate() {
 		else if (findOperator(_valStr.top()) == '/') {
 			a = _calcStack.top();
 			if (a == 0) {
-				std::cerr << "Illegal" << std::endl;
+				std::cerr << RED "Illegal" RESET << std::endl;
 				return (1);
 			}
 			_calcStack.pop();
@@ -145,7 +145,7 @@ int Rpn::calculate() {
 			_valStr.pop();
 		}
 	}
-	std::cout << _calcStack.top() << std::endl;
+	std::cout << GREEN << _calcStack.top() << RESET << std::endl;
 	return (0);
 }
 

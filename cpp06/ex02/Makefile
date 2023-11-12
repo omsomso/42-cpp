@@ -5,7 +5,7 @@ SRC 	= 	main.cpp Base.cpp
 OBJ		=	$(SRC:.cpp=.o)
 
 GREEN=\033[0;32m
-RED=\033[0;31m
+RED=c
 BLUE=\033[0;34m
 END=\033[0m
 

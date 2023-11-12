@@ -6,23 +6,27 @@
 # include <stack>
 # include <sstream>
 
+# define GREEN "\033[0;32m"
+# define RESET "\033[0m"
+# define RED "\033[0;31m"
+
 class Rpn {
 	private:
-	std::stack<std::string> _valStr;
-	std::stack<long> _calcStack;
-	bool isValidInput(std::string input);
-	bool isNumber(std::string input);
-	char findOperator(std::string input);
-	int parseInput(std::string input);
-	int	calculate();
+		std::stack<std::string> _valStr;
+		std::stack<long double> _calcStack;
+		bool isValidInput(std::string input);
+		bool isNumber(std::string input);
+		char findOperator(std::string input);
+		int parseInput(std::string input);
+		int	calculate();
 
 	public:
-	Rpn();
-	Rpn(Rpn& other);
-	~Rpn();
-	Rpn& operator=(Rpn& other);
+		Rpn();
+		Rpn(Rpn& other);
+		~Rpn();
+		Rpn& operator=(Rpn& other);
 
-	static int	calculator(std::string input);
+		static int	calculator(std::string input);
 
 };
 

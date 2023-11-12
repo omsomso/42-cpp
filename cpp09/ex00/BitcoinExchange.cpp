@@ -102,15 +102,18 @@ bool Btc::isLeap(long year) {
 }
 
 bool Btc::isValidDate(long day, long month, long year) {
-	// if (day > std::numeric_limits(int) || month >)
+	if (day > std::numeric_limits<int>::max() || month > std::numeric_limits<int>::max() || year > 2100 || year < 1970) {
+		std::cerr << "No luck gringo" << std::endl;
+		return (false);
+	}
     if (year < 0 || month < 1 || month > 12 || day < 1 || day > 31) {
-        return false;
+        return (false);
     }
     if (month == 2) {
-        return day <= 28 || (isLeap(year) && day == 29);
+        return (day <= 28 || (isLeap(year) && day == 29));
     }
     if (month == 4 || month == 6 || month == 9 || month == 11) {
-        return day <= 30;
+        return (day <= 30);
     }
     return (true);
 }
@@ -144,10 +147,6 @@ bool Btc::checkValidDate(std::string line) {
 	yearLng = stol(yearStr);
 	monthLng = stol(monthStr);
 	dayLng = stol(dayStr);
-	if (yearLng > 2100 || yearLng < 1970) {
-		std::cerr << "No luck gringo" << std::endl;
-		return (false);
-	}
 	if (!isValidDate(dayLng, monthLng, yearLng)) {
 		std::cerr << "Error: invalid date => " << dayLng << "-" << monthLng << "-" << dayLng << std::endl;
 		return (false);
@@ -189,7 +188,7 @@ int Btc::parseInLine(std::string line) {
 		return (1);
 	}
 	if (strDate.empty() || strVal.empty()) {
-		std::cerr << "str empty" << std::endl;
+		std::cerr << "Error : lacking query" << std::endl;
 		return (1);
 	}
 	float val = std::stof(strVal);
@@ -200,8 +199,6 @@ int Btc::parseInLine(std::string line) {
 	time_t date = parseDate(&strDate[0], "%Y-%m-%d");
 	if (date == -1)
 		return (-1);
-	// std::cout << "val = " << val << std::endl;
-	// _input.insert(std::pair<time_t, float>(date, val));
 	_inDate = date;
 	_inVal = val;
 	line.clear();
@@ -240,25 +237,15 @@ int Btc::convert(std::string input) {
 	std::map<time_t, float>::iterator found;
 	std::string line;
 	while (std::getline(exchange._inFile, line)) {
-		// std::cout << line << std::endl;
 		if (!exchange.parseInLine(line) && !line.empty()) {
 			found = exchange._db.upper_bound(exchange._inDate);
 			found--;
 			date = found->first;
 			val = found->second;
 			qval = exchange._inVal;
-			// std::cout << "val to eval = " << qval << std::endl;
 			std::cout << exchange.outputDateStr(date, "%Y-%m-%d") << " => " << exchange._inVal << " = " << val * qval << std::endl;
 			line.clear();
-			// set = true;
 		}
 	}
-	// for (std::map<time_t, float>::iterator it = exchange._input.begin(); it != exchange._input.end(); ++it) {
-	// 	found = exchange._db.lower_bound(it->first);
-	// 	date = found->first;
-	// 	val = found->second;
-	// 	qval = it->second;
-	// 	std::cout << exchange.outputDateStr(date, "%Y-%m-%d") << " => " << it->second << " = " << val * qval << std::endl;
-	// }
 	return (0);
 }
