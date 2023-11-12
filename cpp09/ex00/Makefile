@@ -12,6 +12,7 @@ ORANGE	=	\033[33m
 GREY	=	\033[90m
 END		=	\033[0m
 
+MSGFIL=@printf "$(END)$(GREEN)preparing database...$(GREY)\n"
 MSGOBJ=@printf "$(END)$(GREEN)creating object files...$(GREY)\n"
 MSGEXE=@printf "$(END)$(GREEN)creating executable...$(GREY)\n"
 MSGRUN=@printf "$(END)$(GREEN)running executable$(END)\n"
@@ -23,10 +24,11 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(MSGEXE)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-	@curl https://cdn.intra.42.fr/document/document/20227/cpp_09.tgz --output cpp_09.tgz
-	@tar -xf cpp_09.tgz
-	@mv cpp_09/data.csv .
-	@rm -rf cpp_09 cpp_09.tgz
+	$(MSGFIL)
+	curl https://cdn.intra.42.fr/document/document/20227/cpp_09.tgz --output cpp_09.tgz
+	tar -xf cpp_09.tgz
+	mv cpp_09/data.csv .
+	rm -rf cpp_09 cpp_09.tgz
 
 %.o : %.cpp
 	$(MSGOBJ)

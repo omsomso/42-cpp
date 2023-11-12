@@ -10,3 +10,5 @@ int main(int ac, char** av)
 	PmergeMe::sort(++av);
 	return (0);
 }
+
+// https://iq.opengenus.org/merge-insertion-sort/
