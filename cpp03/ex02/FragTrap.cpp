@@ -20,19 +20,19 @@ FragTrap::~FragTrap() {
 
 }
 
-// FragTrap::FragTrap(const FragTrap &other) {
-// 	std::cout << "FragTrap copy constructor called for " << other._name << std::endl;
-// 	*this = other;
-// }
+FragTrap::FragTrap(const FragTrap &other) {
+	std::cout << "FragTrap copy constructor called for " << other._name << std::endl;
+	*this = other;
+}
 
-// FragTrap& FragTrap::operator=(const FragTrap &other) {
-// 	std::cout << "FragTrap copy assignment operator called" << std::endl;
-// 	this->_name = other._name;
-// 	this->_hitPoints = other._hitPoints;
-// 	this->_energyPoints = other._energyPoints;
-// 	this->_attackDamage = other._attackDamage;
-// 	return (*this);
-// }
+FragTrap& FragTrap::operator=(const FragTrap &other) {
+	std::cout << "FragTrap copy assignment operator called" << std::endl;
+	this->_name = other._name;
+	this->_hitPoints = other._hitPoints;
+	this->_energyPoints = other._energyPoints;
+	this->_attackDamage = other._attackDamage;
+	return (*this);
+}
 
 void FragTrap::attack(const std::string& target) {
 	std::cout << "FragTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
