@@ -8,6 +8,10 @@ RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("Robotomy R
 	this->setTarget(target);
 }
 
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm &other){
+	*this = other;
+}
+
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(RobotomyRequestForm &other) {

@@ -14,6 +14,10 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(ShrubberyCreationForm &o
 	return (*this);
 }
 
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &other) {
+	*this = other;
+}
+
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 void ShrubberyCreationForm::execute(Bureaucrat const& executor) const {

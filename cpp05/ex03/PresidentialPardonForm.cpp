@@ -8,6 +8,10 @@ PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("Pres
 	this->setTarget(target);
 }
 
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm &other){
+	*this = other;
+}
+
 PresidentialPardonForm::~PresidentialPardonForm() {}
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(PresidentialPardonForm &other) {

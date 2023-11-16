@@ -9,6 +9,7 @@ class RobotomyRequestForm : public AForm {
 	public :
 	RobotomyRequestForm();
 	RobotomyRequestForm(std::string target);
+	RobotomyRequestForm(RobotomyRequestForm &other);
 	~RobotomyRequestForm();
 	RobotomyRequestForm& operator=(RobotomyRequestForm &other);
 
