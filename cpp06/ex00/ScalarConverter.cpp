@@ -113,7 +113,7 @@ void ScalarConverter::convert(std::string input) {
 		printSpecialValues(specialValues[1]);
 		return ;
 	}
-	else if (std::isnan(inputLD)) {
+	else if (isnan(inputLD)) {
 		printSpecialValues(specialValues[5]);
 		return ;
 	}
